@@ -22,7 +22,48 @@
 }
 
 .title {
+  font-size: 26px;
   text-align: center;
-  margin: 28px;
+  margin: 24px;
   line-height: 150%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.info__box {
+  font-size: 14px;
+  background-color: var(--foreground);
+  color: var(--background);
+  padding: 14px 44px;
+  border-radius: 4px;
+}
+
+.info__box:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+@media screen and (max-width: 580px) {
+  .logo__hero {
+    max-width: 75%;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .info {
+    flex-direction: column;
+  }
+
+  .info__box {
+    font-size: 12px;
+    width: 80%;
+    margin-bottom: 14px;
+    text-align: center;
+  }
 }
