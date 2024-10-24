@@ -33,7 +33,7 @@ export default function Home() {
         <main className={`${styles.main}`}>
           <div className={`${styles.logo}`}>
             <Image
-              className={`${styles.hero}`}
+              className={`${styles.logo__hero}`}
               alt="Logo Tarefas+"
               src="/assets/hero.png"
               width={579}
