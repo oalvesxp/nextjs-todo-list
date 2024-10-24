@@ -25,7 +25,11 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div className={`${geistSans.variable} ${geistMono.variable}`}>
+
+      {/** Body content */}
+      <div
+        className={`${styles.container} ${geistSans.variable} ${geistMono.variable}`}
+      >
         <main className={`${styles.main}`}>
           <div className={`${styles.logo}`}>
             <Image
@@ -37,6 +41,9 @@ export default function Home() {
               priority
             />
           </div>
+          <h1 className={`${styles.title}`}>
+            Sistema feito para você organizar <br /> seus estudos e tarefas
+          </h1>
         </main>
       </div>
     </>
