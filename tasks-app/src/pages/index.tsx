@@ -41,9 +41,9 @@ export default function Home() {
               priority
             />
           </div>
-          <h1 className={`${styles.title}`}>
+          <h2 className={`${styles.title}`}>
             Sistema feito para você organizar <br /> seus estudos e tarefas
-          </h1>
+          </h2>
 
           <div className={`${styles.info}`}>
             <section className={`${styles.info__box}`}>
