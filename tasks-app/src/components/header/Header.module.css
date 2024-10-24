@@ -50,6 +50,10 @@
   transition: all 0.2s;
 }
 
+.login span {
+  font-weight: bold;
+}
+
 .login:hover {
   transform: scale(1.05);
   background-color: var(--foreground);
