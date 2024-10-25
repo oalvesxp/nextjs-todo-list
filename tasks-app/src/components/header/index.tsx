@@ -10,9 +10,9 @@ export function Header() {
       <section className={`${styles.header__content}`}>
         <nav className={`${styles.nav}`}>
           <Link href="/">
-            <h1 className={`${styles.nav__logo}`}>
+            <h2 className={`${styles.nav__logo}`}>
               Tarefas<span>+</span>
-            </h1>
+            </h2>
           </Link>
           {session?.user && (
             <Link href="/dashboard" className={`${styles.nav__link}`}>
