@@ -1,12 +1,30 @@
+'use client'
+
 import { GetServerSideProps } from 'next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { TextArea } from '@/components/textarea'
+import { FaShare, FaTrash } from 'react-icons/fa'
 import styles from '@/styles/Dashboard.module.css'
 import Head from 'next/head'
-import { FaShare, FaTrash } from 'react-icons/fa'
 
 export default function Dashboard() {
+  const [input, setInput] = useState('')
+  const [publicTask, setPublicTask] = useState(false)
+
+  function handleChangePublic(e: ChangeEvent<HTMLInputElement>) {
+    setPublicTask(e.target.checked)
+  }
+
+  function handleRegisterTask(e: FormEvent) {
+    e.preventDefault()
+
+    if (input === '') return
+
+    alert('Teste')
+  }
+
   return (
     <>
       <Head>
@@ -20,10 +38,21 @@ export default function Dashboard() {
                 <h1 className={`${styles.content__form__title}`}>
                   Qual sua tarefa?
                 </h1>
-                <form>
-                  <TextArea placeholder="Digite qual sua tarefa" />
+                <form onSubmit={handleRegisterTask}>
+                  <TextArea
+                    placeholder="Digite qual sua tarefa"
+                    value={input}
+                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                      setInput(e?.target.value)
+                    }
+                  />
                   <div className={`${styles.content__form__checkboxArea}`}>
-                    <input type="checkbox" className={`${styles.checkbox}`} />
+                    <input
+                      type="checkbox"
+                      className={`${styles.checkbox}`}
+                      checked={publicTask}
+                      onChange={handleChangePublic}
+                    />
                     <label>Deixar essa tarefa pública?</label>
                   </div>
                   <button type="submit" className={`${styles.button}`}>
