@@ -35,7 +35,7 @@ interface TasksProps {
 export default function Dashboard({ user }: DashboardProps) {
   const [input, setInput] = useState('')
   const [publicTask, setPublicTask] = useState(false)
-  const [data, setData] = useState<TasksProps[]>([])
+  const [tasks, setTasks] = useState<TasksProps[]>([])
 
   useEffect(() => {
     async function loadTasks() {
@@ -60,6 +60,7 @@ export default function Dashboard({ user }: DashboardProps) {
         })
 
         console.log(list)
+        setTasks(list)
       })
     }
 
@@ -127,33 +128,30 @@ export default function Dashboard({ user }: DashboardProps) {
               </div>
             </div>
           </section>
-          {/** className={`${}`} */}
           <section className={`${styles.tasks}`}>
             <h2>Minhas tarefas</h2>
-            <article className={`${styles.item}`}>
-              <div className={`${styles.item___tags}`}>
-                <label className={`${styles.item__tags__public}`}>
-                  Público
-                </label>
-                <button className={`${styles.item__tags__button}`}>
-                  <FaShare size={18} color="#3183ff" />
-                </button>
-              </div>
-              <div className={`${styles.item__content}`}>
-                <p>Primeia tarefa de exemplo</p>
-                <button className={`${styles.item__content__button}`}>
-                  <FaTrash size={18} color="#ea3140" />
-                </button>
-              </div>
-            </article>
-            <article className={`${styles.item}`}>
-              <div className={`${styles.item__content}`}>
-                <p>Segunda tarefa de exemplo</p>
-                <button className={`${styles.item__content__button}`}>
-                  <FaTrash size={18} color="#ea3140" />
-                </button>
-              </div>
-            </article>
+
+            {tasks.map((item) => (
+              <article key={item.id} className={`${styles.item}`}>
+                {item.public && (
+                  <div className={`${styles.item___tags}`}>
+                    <label className={`${styles.item__tags__public}`}>
+                      Público
+                    </label>
+                    <button className={`${styles.item__tags__button}`}>
+                      <FaShare size={18} color="#3183ff" />
+                    </button>
+                  </div>
+                )}
+
+                <div className={`${styles.item__content}`}>
+                  <p>{item.task}</p>
+                  <button className={`${styles.item__content__button}`}>
+                    <FaTrash size={18} color="#ea3140" />
+                  </button>
+                </div>
+              </article>
+            ))}
           </section>
         </main>
       </div>
