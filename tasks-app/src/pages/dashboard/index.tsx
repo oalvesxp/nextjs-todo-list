@@ -8,8 +8,16 @@ import { TextArea } from '@/components/textarea'
 import { FaShare, FaTrash } from 'react-icons/fa'
 import styles from '@/styles/Dashboard.module.css'
 import Head from 'next/head'
+import { db } from '@/services/firebaseConnection'
+import { addDoc, collection } from 'firebase/firestore'
 
-export default function Dashboard() {
+interface DashboardProps {
+  user: {
+    email: string
+  }
+}
+
+export default function Dashboard({ user }: DashboardProps) {
   const [input, setInput] = useState('')
   const [publicTask, setPublicTask] = useState(false)
 
@@ -17,12 +25,24 @@ export default function Dashboard() {
     setPublicTask(e.target.checked)
   }
 
-  function handleRegisterTask(e: FormEvent) {
+  async function handleRegisterTask(e: FormEvent) {
     e.preventDefault()
 
     if (input === '') return
 
-    alert('Teste')
+    try {
+      await addDoc(collection(db, 'taks'), {
+        task: input,
+        created: new Date(),
+        user: user?.email,
+        public: publicTask,
+      })
+
+      setInput('')
+      setPublicTask(false)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -108,6 +128,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   return {
-    props: {},
+    props: {
+      user: {
+        email: session?.user?.email,
+      },
+    },
   }
 }
