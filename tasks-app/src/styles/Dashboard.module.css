@@ -48,6 +48,11 @@
   cursor: pointer;
 }
 
+.button:hover {
+  opacity: 85%;
+  transition: opacity 0.1s ease-in;
+}
+
 .tasks {
   max-width: 1024;
   width: 100%;
