@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth'
 import { TextArea } from '@/components/textarea'
 import styles from '@/styles/Dashboard.module.css'
 import Head from 'next/head'
+import { FaShare, FaTrash } from 'react-icons/fa'
 
 export default function Dashboard() {
   return (
@@ -31,6 +32,34 @@ export default function Dashboard() {
                 </form>
               </div>
             </div>
+          </section>
+          {/** className={`${}`} */}
+          <section className={`${styles.tasks}`}>
+            <h2>Minhas tarefas</h2>
+            <article className={`${styles.item}`}>
+              <div className={`${styles.item___tags}`}>
+                <label className={`${styles.item__tags__public}`}>
+                  Público
+                </label>
+                <button className={`${styles.item__tags__button}`}>
+                  <FaShare size={18} color="#3183ff" />
+                </button>
+              </div>
+              <div className={`${styles.item__content}`}>
+                <p>Primeia tarefa de exemplo</p>
+                <button className={`${styles.item__content__button}`}>
+                  <FaTrash size={18} color="#ea3140" />
+                </button>
+              </div>
+            </article>
+            <article className={`${styles.item}`}>
+              <div className={`${styles.item__content}`}>
+                <p>Segunda tarefa de exemplo</p>
+                <button className={`${styles.item__content__button}`}>
+                  <FaTrash size={18} color="#ea3140" />
+                </button>
+              </div>
+            </article>
           </section>
         </main>
       </div>
