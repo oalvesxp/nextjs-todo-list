@@ -3,13 +3,20 @@
 import { GetServerSideProps } from 'next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
-import { ChangeEvent, FormEvent, useState } from 'react'
 import { TextArea } from '@/components/textarea'
 import { FaShare, FaTrash } from 'react-icons/fa'
 import styles from '@/styles/Dashboard.module.css'
 import Head from 'next/head'
 import { db } from '@/services/firebaseConnection'
-import { addDoc, collection } from 'firebase/firestore'
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react'
+import {
+  addDoc,
+  collection,
+  query,
+  orderBy,
+  where,
+  onSnapshot,
+} from 'firebase/firestore'
 
 interface DashboardProps {
   user: {
@@ -17,9 +24,47 @@ interface DashboardProps {
   }
 }
 
+interface TasksProps {
+  id: string
+  created: Date
+  public: boolean
+  task: string
+  author: string
+}
+
 export default function Dashboard({ user }: DashboardProps) {
   const [input, setInput] = useState('')
   const [publicTask, setPublicTask] = useState(false)
+  const [data, setData] = useState<TasksProps[]>([])
+
+  useEffect(() => {
+    async function loadTasks() {
+      const tasksRef = collection(db, 'tasks')
+      const qry = query(
+        tasksRef,
+        orderBy('created', 'desc'),
+        where('user', '==', user?.email)
+      )
+
+      onSnapshot(qry, (snapshot) => {
+        let list = [] as TasksProps[]
+
+        snapshot.forEach((doc) => {
+          list.push({
+            id: doc.id,
+            created: doc.data().created,
+            public: doc.data().public,
+            task: doc.data().task,
+            author: doc.data().user,
+          })
+        })
+
+        console.log(list)
+      })
+    }
+
+    loadTasks()
+  }, [user?.email])
 
   function handleChangePublic(e: ChangeEvent<HTMLInputElement>) {
     setPublicTask(e.target.checked)
@@ -31,7 +76,7 @@ export default function Dashboard({ user }: DashboardProps) {
     if (input === '') return
 
     try {
-      await addDoc(collection(db, 'taks'), {
+      await addDoc(collection(db, 'tasks'), {
         task: input,
         created: new Date(),
         user: user?.email,
