@@ -1,5 +1,3 @@
-'use client'
-
 import { GetServerSideProps } from 'next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
@@ -59,7 +57,6 @@ export default function Dashboard({ user }: DashboardProps) {
           })
         })
 
-        console.log(list)
         setTasks(list)
       })
     }
