@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY as string,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN as string,
-  projectId: process.env.FIREBASE_PROJECT_ID as string,
-  storageBucket: process.env.FIREBASE_BUCKET as string,
-  messagingSenderId: process.env.FIREBASE_SENDER_ID as string,
-  appId: process.env.FIREBASE_APP_ID as string,
+  apiKey: 'AIzaSyBou0RkHvzQqoS1sL2AKmn7FMj8OT_SxgA',
+  authDomain: 'tarefasplus-e4b7e.firebaseapp.com',
+  projectId: 'tarefasplus-e4b7e',
+  storageBucket: 'tarefasplus-e4b7e.appspot.com',
+  messagingSenderId: '984428704967',
+  appId: '1:984428704967:web:685ec3db87eef83c75fae2',
 }
 
 const firebaseApp = initializeApp(firebaseConfig)
