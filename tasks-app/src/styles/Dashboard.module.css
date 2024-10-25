@@ -1,0 +1,49 @@
+.container {
+  width: 100%;
+}
+
+.content {
+  background: var(--background);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__form {
+  max-width: 680px;
+  width: 100%;
+  padding: 0 18px;
+  padding-bottom: 28px;
+  margin-top: 32px;
+}
+
+.content__form__title {
+  margin-bottom: 8px;
+}
+
+.content__form__checkboxArea label {
+  margin-left: 8px;
+  color: var(--foreground);
+}
+
+.content__form__checkboxArea {
+  margin: 14px 0;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.button {
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  color: var(--foreground);
+  background: #3183ff;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
